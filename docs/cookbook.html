@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TSprite Cookbook</title>
+    <link rel="stylesheet" href="docs.css" type="text/css" />
+</head>
+<body>
+    <div id="app">
+        <header>TSprite Cookbook</header>
+        <div id="main">
+<!--**************************************************************************-->
+            <h3>Custom drawn sprite</h3>
+            <p>
+                A custom drawn sprite is one in which you provide the code to draw the sprite on an HTML5 canvas 2D context.
+                Pass the draw function as a parameter into the constructor.
+                The following creates a sprite that is a blue rectangle at position (10, 10) with size of 32 by 32.
+            </p>
+            <pre>
+var sprite = new TSprite.Canvas.CanvasSprite(
+    (context, x, y, w, h) =>
+    {
+        context.fillStyle = "Blue";
+        context.fillRect(x, y, w, h);
+    }
+    , 10, 10, 32, 32);
+            </pre>
+            <p>
+                If your drawing algorithm is a bit more complicated you can pass in an object that implements the TSprite.Canvas.IDrawable interface.
+                The following draws a rectangle that fades in and out.
+            </p>
+            <pre>
+class DrawableRect implements TSprite.Canvas.IDrawable
+{
+    private alpha = 1.0;
+    private alphaDelta = -30 / 1000;
+    constructor(private w: number, private h: number) { }
+    draw(context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
+        this.alpha += this.alphaDelta;
+        if (this.alpha < 0.1 || this.alpha > 1) this.alphaDelta *= -1;
+        context.fillStyle = "rgba(0,0,255," + this.alpha + ")";
+        context.fillRect(x, y, w, h);
+    }
+    getWidth(): number { return this.w; }
+    getHeight(): number { return this.h; }
+};
+var sprite = new TSprite.Canvas.CanvasSprite(new DrawableRect(), 10, 10, 32, 32);
+            </pre>
+<!--**************************************************************************-->
+            <h3>Image sprite</h3>
+            <p>
+                An image sprite uses an HTMLImageElement.
+                The following creates a sprite that uses ball.png at position (10, 10) with size the same as the image size.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "ball.png";
+img.onload = () =>
+{
+    // The size will be set to the size of the image
+    sprite = new TSprite.Canvas.ImageSprite(img, 10, 10);
+}
+            </pre>
+            <h3>Sprite Sheets</h3>
+            <p>
+                In addition to using an HTML image you can easily extract images from a sprite sheet and use them in a sprite.
+                The following gets the image at offset (32, 64) with a size of 16 by 16.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "sprites.png";
+img.onload = () =>
+{
+    var spriteSheet = new TSprite.Canvas.SpriteSheet(img);
+    var ssImage = spriteSheet.getImage(32, 64, 16, 16);
+    sprite = new TSprite.Canvas.CanvasSprite(ssImage, 10, 10);
+}
+            </pre>
+<!--**************************************************************************-->
+            <h3>Animated sprite</h3>
+            <p>
+                You can create animated sprites from a sprite sheet that contains any number of animation frames.
+                The frames can be placed in any configuration of rows and columns.
+                The following image is one set of animation frames with 2 rows and 4 columns.<br />
+                <img src="animframes.png" title="Animation frames" />
+            </p>
+            <p>
+                The following creates an animated sprite from the image above that changes at 16 frames per second.
+                Each frame size is 32 by 32 pixels.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "animframes.png";
+img.onload = () =>
+{
+    var frames = new TSprite.Canvas.ImageAnimationFrames(img, 32, 32, 2, 4);
+    this.sprite = new TSprite.Canvas.AnimatedSprite(frames, 16);
+}
+            </pre>
+            <p>
+                You can also extract animation frames from a sprite sheet using getAnimationFrames().
+                The following gets animation frames that are 32 by 32 pixels in 2 rows and 4 columns starting at offset (0, 64) in the spritesheet.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "animframes.png";
+img.onload = () =>
+{
+    var spriteSheet = new TSprite.Canvas.SpriteSheet(img);
+    var frames = spriteSheet.getAnimationFrames(32, 32, 2, 4, 0, 64);
+    this.sprite = new TSprite.Canvas.AnimatedSprite(frames, 16);
+}
+            </pre>
+<!--**************************************************************************-->
+            <h3>Moving sprites</h3>
+            <p>
+                To move sprites around you can either use the x and y properties, the moveTo() method, or you can set the velocity of a sprite and call the sprite's update() method to have it moved automatically.
+                The update() method takes the number of milliseconds that have elapsed since the last call to update and applies it to the velocity to change the position.
+                To set a sprite's velocity you can do it directly through its vx and vy properties, which are in pixels per ms.
+                Or you can set it using the setVelocity() method which takes pixels per second.
+                I find it much easier to think in pixels per second as pixels per ms could be fractional numbers.
+            </p>
+            <pre>
+var sprite = new TSprite.Canvas.ImageSprite(img, 10, 10);
+sprite.setVelocity(8, 16); // Same as sprite.vx = 8/1000 and sprite.vy = 16/1000
+sprite.update(dt); // Here dt is the number of ms that have elapsed
+            </pre>
+<!--**************************************************************************-->
+            <h3>Animation Loop</h3>
+            <p>
+                TSprite provides an animation loop manager class named TSprite.AnimationLoop.
+                You give it a function to call for every iteration of your game loop, which is based on the JavaScript requestAnimationFrame() function that usually fires 60 times per second.
+                It calls that function and passes it the actual number of milliseconds that have elapsed since the last iteration.
+                You can pass the number of milliseconds into the update() method of your sprites to cause them to update themselves.
+            </p>
+            <p>
+                The following creates a sprite and gives it a velocity of 8 pixels per second on the x axis and 16 on the y axis.
+                The animation loop simply updates the sprite.
+                This is where you would also check for collisions and do anything else that has to happen for each iteration.
+                Finally it starts the loop.
+            </p>
+            <pre>
+var sprite = new TSprite.Canvas.ImageSprite(img, 10, 10);
+sprite.setVelocity(8, 16);
+var loop = new TSprite.AnimationLoop((dt) => 
+{
+    sprite.update(dt);
+});
+loop.start();
+            </pre>
+            <p>
+                To pause the loop call stop().
+            </p>
+<!--**************************************************************************-->
+            <h3>Collision checking</h3>
+            <p>
+                To check if two sprites have collided call sprite.intersects() passing in a reference to the other sprite.
+            </p>
+            <pre>
+if (sprite1.intersects(sprite2)) {
+    // handle collision
+}
+            </pre>
+<!--**************************************************************************-->
+            <h3>Bounding panel</h3>
+            <p>
+                You can use a TSprite.Panel to keep a sprite inside of it.
+                Call the panel's restrictBounds() method passing in the sprite to keep inside.
+            </p>
+            <pre>
+var bounds = new TSprite.Panel(0, 0, canvas.width, canvas.height);
+var sprite = new TSprite.Canvas.ImageSprite(img, 10, 10);
+sprite.setVelocity(8, 16);
+var loop = new TSprite.AnimationLoop((dt) => 
+{
+    sprite.update(dt);
+    bounds.restrictBounds(sprite);
+});
+loop.start();
+            </pre>
+            <p>
+                If you just want to check for border collisions but not restrict a sprite to the inside of a panel call checkBounds().
+                It returns a number that is a bitwise combination of all borders that were hit.
+                You can check the value against TSprite.BorderFlags to see which border was hit.
+            </p>
+            <pre>
+var loop = new TSprite.AnimationLoop((dt) => 
+{
+    sprite.update(dt);
+    var borders = bounds.checkBounds(sprite);
+    if (borders & TSprite.BorderFlags.LEFT) { /* hit left border */ }
+    if (borders & TSprite.BorderFlags.TOP) { /* hit top border */ }
+});
+            </pre>
+            <p>If you don't like using bitwise operators there are some function under TSprite.BorderCheck that can help you.</p>
+            <pre>
+var borders = bounds.checkBounds(sprite);
+if (TSprite.BorderCheck.left(borders)) { /* hit left border */ }
+if (TSprite.BorderCheck.top(borders)) { /* hit top border */ }
+            </pre>
+<!--**************************************************************************-->
+            <h3>Background image panel</h3>
+            <p>
+                You can set the background color of a canvas panel using the setBackgroundColor() method.
+                You can use any CSS color specifier including color names, rbg, hsl, etc.
+                If you want to add a background image to a panel you can pass in an HTML image or a sprite sheet image into the CanvasPanel constructor.
+                By setting the background style you can specify how the background image is drawn, including tiled or stretched.
+            </p>
+            <p>
+                The following creates a panel that covers the entire canvas and sets the background image to repeat in all directions.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "background.png";
+img.onload = () =>
+{
+    panel = new TSprite.Canvas.CanvasPanel(0, 0, canvas.width, canvas.height, img);
+    panel.setBackgroundStyle(TSprite.Canvas.BackgroundStyle.REPEAT);
+}
+            </pre>
+<!--**************************************************************************-->
+            <h3>Scrolling background image panel</h3>
+            <p>
+                If you want to have a scrolling background you can use a ScrollingPanel.
+                You tell it how fast to scoll in each direction by passing in the velocity in pixels per second.
+            </p>
+            <p>
+                The following creates a panel that continuously scrolls a background image to the left at 20 pixels per second.
+            </p>
+            <pre>
+var img = new Image();
+img.src = "background.png";
+img.onload = () =>
+{
+    panel = new TSprite.Canvas.ScrollingPanel(0, 0, canvas.width, canvas.height, img, -20, 0);
+    panel.setBackgroundStyle(TSprite.Canvas.BackgroundStyle.REPEAT_X);
+}
+var loop = new TSprite.AnimationLoop((dt) => 
+{
+    panel.update(dt);
+}
+            </pre>
+            <p>
+                Tip: By using multiple panels on top of each other moving at different speeds you could implement a parallax view.
+            </p>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+</html>

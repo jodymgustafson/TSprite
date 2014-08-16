@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TSprite Overview</title>
+    <link rel="stylesheet" href="docs.css" type="text/css" />
+</head>
+<body>
+    <div id="app">
+        <header>TSprite Overview</header>
+        <div id="main">
+            <h3>What is TSprite?</h3>
+            <p>TSprite is a TypeScript library for easily creating sprites and panels on an HTML5 canvas element.</p>
+            <p>
+                TSprite attempts to be as simple to use as possible while being as performant as possible.
+                It is not a complete game management system that locks you into a certain way of creating games.
+                It shouldn't take long to pick up the concepts and get working.
+                If it does then I have failed.
+            </p>
+            <p>
+                TSprite contains sprites, panels, some classes to help work with sprite sheets and animations, some sprite collections, and an animation loop utility.
+            </p>
+            <h3>Requirements</h3>
+            <p>
+                TSprite should work in any modern browser that supports HTML5 canvas.
+                For IE that means version 9+.
+            </p>
+            <h3>Sprites</h3>
+            <p>
+                TSprite sprites have a position, size and velocity.
+                The velocity is defined in terms of pixels per second.
+                Every time a sprite is updated its position is changed based on the amount of time that has elapsed and the velocity.
+                This keeps them moving at the same speed no matter what the frame rate is.
+            </p>
+            <p>
+                Sprites can be owner drawn using HTML canvas context primitives, from an image, or from a series of images in a sprite sheet for animations.
+                TSprite provides classes to help easily create sprite sheets and extract images and animation frames from them.
+            </p>
+            <p>
+                All sprites have default collision checking using a rectangle intersection algorithm.
+                Sprites have one collision area by default which is the sprite's bounding rectangle.
+                Unfortunately not all sprites fit neatly into a rectangle.
+                Therefore you may define any number of collision areas inside a sprite to get more accurate collision detection.
+            </p>
+            <h3>Panels</h3>
+            <p>
+                In addition to sprites TSprite implements panels.
+                Panels are rectangular areas of the screen.
+                Panels can be used as a bounding areas to keep sprites from moving outside of them.
+                Panels may have background images that can be tiled in any direction or stretched.
+                There is also a scrolling panel that will scroll a background image in any direction.
+            </p>
+            <h3>Sprite Sheets</h3>
+            <p>
+                A sprite sheet is an image that contains any number of images.
+                This allows you to define all of your images in one file reducing download time.
+            </p>
+            <p>
+                TSprite makes it easy to work with sprite sheets.
+                You can easily extract an image from any position inside the sprite sheet.
+            </p>
+            <p>
+                You can also easily extract a number of images from a sprite sheet to use for animations.
+                Your animation images may be arranged in any number of rows and columns.
+                TSprite will extract the individual animation frames to be used by your sprite.
+            </p>
+            <h3>Animation Loop</h3>
+            <p>
+                The heart of any game is the animation loop.
+                In HTML5 apps this is controlled by the getAnimationFrame() function.
+            </p>
+            <p>
+                TSprite provides a class to manage the animation loop for your game.
+                You can easily start and stop the loop and get information about performance.
+                If an animation frame takes to long it will drop that frame.
+                This usually happens when you are debugging and have your app stopped at a breakpoint.
+            </p>
+            <h3>Sprite Collections</h3>
+            <p>
+                TSprite provides some collection classes to help manage lists of sprites.
+                They are designed to allow you to enumerate through the list and quickly add or delete sprites.
+                There is a collection that sorts by z-order of the sprite that allows you to draw sprites in the correct order.
+            </p>
+            <h3>Project Orgnization</h3>
+            <p>
+                TSprite is broken up into a number of individual TypeScript files so you can include only the ones you need.
+                Each file contains one or more classes.
+                You can determine dependencies of a file by looking at the references defined at the top of the file.
+            </p>
+            <ul>
+                <li>Base.ts - Contains all of the sprite base classes. Everything else depends on it.</li>
+                <li>Panel.ts - Contains the code for panels</li>
+                <li>Canvas.ts - Contains the code for HTML5 canvas sprites</li>
+                <li>CanvasPanel.ts - Contains the code for HTML5 canvas panels</li>
+                <li>AnimationLoop.ts - Contains the code for the animation loop</li>
+                <li>Collections.ts - Contains the code for sprite collections</li>
+            </ul>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+</html>

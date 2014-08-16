@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSprite", "TSprite.csproj", "{185EA092-E3D9-4914-AB05-9E5EBD0805A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A2D53848-A210-47D1-B3BC-B791F6EBC11B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "typings", "typings", "{24CF18D3-2463-4BE9-9F8D-E59624ECA692}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "jquery", "jquery", "{27043614-7F1A-419A-B7B2-E9DC6C8C5580}"
+	ProjectSection(SolutionItems) = preProject
+		typings\jquery\jquery.d.ts = typings\jquery\jquery.d.ts
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{BE53978B-BE52-4249-9B60-088077991A7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1F3CA2B3-D8B7-4CE4-9509-BC0A4FB53196}"
+	ProjectSection(SolutionItems) = preProject
+		docs\animframes.png = docs\animframes.png
+		docs\classes.html = docs\classes.html
+		docs\cookbook.html = docs\cookbook.html
+		docs\docs.css = docs\docs.css
+		docs\index.html = docs\index.html
+		docs\overview.html = docs\overview.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE53978B-BE52-4249-9B60-088077991A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE53978B-BE52-4249-9B60-088077991A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE53978B-BE52-4249-9B60-088077991A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE53978B-BE52-4249-9B60-088077991A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27043614-7F1A-419A-B7B2-E9DC6C8C5580} = {24CF18D3-2463-4BE9-9F8D-E59624ECA692}
+	EndGlobalSection
+EndGlobal

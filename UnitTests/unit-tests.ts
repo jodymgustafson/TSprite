@@ -34,6 +34,13 @@ class UnitTests extends tsUnit.TestClass
         this.areIdentical(list.count, 5);
         this.areIdentical(list.toString(), "4,2,0,3,1");
 
+        var s = new TSprite.Sprite(100, 0);
+        list.add(s); //id=4
+        this.areIdentical(list.count, 6);
+        this.areIdentical(list.toString(), "4,2,0,3,1,5");
+        list.removeSprite(s);
+        this.areIdentical(list.count, 5);
+
         list.removeAt(3);
         list.removeAt(1);
         this.areIdentical(list.count, 3);

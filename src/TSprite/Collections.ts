@@ -108,13 +108,13 @@ module TSprite
                     if (index === 0)
                     {
                         this._first = this._first.next;
+                        --this._count;
                     }
                     else
                     {
                         var node = this._getNode(index);
                         this._removeNode(node);
                     }
-                    --this._count;
                 }
             }
 
@@ -143,6 +143,7 @@ module TSprite
 
                 // Clear the node out to prevent memory leak
                 node.next = node.prev = null;
+                --this._count;
             }
 
             /** Truncates the list at the specified index */

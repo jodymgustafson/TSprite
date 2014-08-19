@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSprite", "TSprite.csproj", "{185EA092-E3D9-4914-AB05-9E5EBD0805A7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A2D53848-A210-47D1-B3BC-B791F6EBC11B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "typings", "typings", "{24CF18D3-2463-4BE9-9F8D-E59624ECA692}"
@@ -24,16 +22,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1F3CA2B3-D
 		docs\overview.html = docs\overview.html
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSprite", "TSprite\TSprite.csproj", "{40DA5010-6B58-4297-BFE4-AEBE470A4756}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{185EA092-E3D9-4914-AB05-9E5EBD0805A7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2D53848-A210-47D1-B3BC-B791F6EBC11B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,6 +38,10 @@ Global
 		{BE53978B-BE52-4249-9B60-088077991A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE53978B-BE52-4249-9B60-088077991A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE53978B-BE52-4249-9B60-088077991A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40DA5010-6B58-4297-BFE4-AEBE470A4756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DA5010-6B58-4297-BFE4-AEBE470A4756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DA5010-6B58-4297-BFE4-AEBE470A4756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DA5010-6B58-4297-BFE4-AEBE470A4756}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

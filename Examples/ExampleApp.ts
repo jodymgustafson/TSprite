@@ -1,6 +1,6 @@
 ﻿/// <reference path="../typings/jquery/jquery.d.ts" />
-/// <reference path="../src/TSprite/Base.ts" />
-/// <reference path="../src/TSprite/AnimationLoop.ts" />
+/// <reference path="../TSprite/Base.ts" />
+/// <reference path="../TSprite/AnimationLoop.ts" />
 
 /**
 * Base class for example apps

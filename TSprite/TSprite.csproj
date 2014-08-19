@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{185EA092-E3D9-4914-AB05-9E5EBD0805A7}</ProjectGuid>
+    <ProjectGuid>{40DA5010-6B58-4297-BFE4-AEBE470A4756}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <OutputPath>bin</OutputPath>
@@ -17,14 +17,13 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="src\TSprite\AnimationLoop.ts" />
-    <Content Include="src\TSprite\Base.ts" />
-    <Content Include="src\TSprite\Canvas.ts" />
-    <TypeScriptCompile Include="src\TSprite\CanvasPanel.ts" />
-    <TypeScriptCompile Include="src\TSprite\Collections.ts" />
-    <TypeScriptCompile Include="src\TSprite\Panel.ts" />
+    <Content Include="AnimationLoop.ts" />
+    <Content Include="Base.ts" />
+    <Content Include="Canvas.ts" />
+    <Content Include="CanvasPanel.ts" />
+    <Content Include="Collections.ts" />
+    <Content Include="Panel.ts" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -40,7 +39,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>61317</DevelopmentServerPort>
+          <DevelopmentServerPort>63020</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

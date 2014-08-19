@@ -16,29 +16,29 @@
     /** Functions used to check borders from BorderFlags combinations */
     export module BorderCheck
     {
-        export function top(borders: number)
+        export function top(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.TOP;
+            return (borders & TSprite.BorderFlags.TOP) !== 0;
         }
-        export function bottom(borders: number)
+        export function bottom(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.BOTTOM;
+            return (borders & TSprite.BorderFlags.BOTTOM) !== 0;
         }
-        export function left(borders: number)
+        export function left(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.LEFT;
+            return (borders & TSprite.BorderFlags.LEFT) !== 0;
         }
-        export function right(borders: number)
+        export function right(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.RIGHT;
+            return (borders & TSprite.BorderFlags.RIGHT) !== 0;
         }
-        export function topOrBottom(borders: number)
+        export function topOrBottom(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.TOPORBOTTOM;
+            return (borders & TSprite.BorderFlags.TOPORBOTTOM) !== 0;
         }
-        export function leftOrRight(borders: number)
+        export function leftOrRight(borders: number): boolean
         {
-            return borders & TSprite.BorderFlags.LEFTORRIGHT;
+            return (borders & TSprite.BorderFlags.LEFTORRIGHT) !== 0;
         }
     }
 
@@ -55,7 +55,7 @@
         }
 
         /**
-         * Checks if an item is ouside the bounds of this panel
+         * Checks if an item is touching or ouside the bounds of this panel
          * @param rect The item to check
          * @return The borders that were hit using TSprite.BorderFlags
          */

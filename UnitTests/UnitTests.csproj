@@ -17,9 +17,11 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="SpriteTests.ts" />
+    <TypeScriptCompile Include="PanelTests.ts" />
+    <Content Include="TSTest.ts" />
     <Content Include="unit-tests.css" />
     <Content Include="unit-tests.html" />
-    <Content Include="tsUnit.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="unit-tests.ts" />

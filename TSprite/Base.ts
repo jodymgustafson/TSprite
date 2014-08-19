@@ -63,6 +63,11 @@ module TSprite
 
     // Used to keep track of next UID internally for sprites
     var nextUID = 0;
+    // Resets the UID to the base number specified
+    export function resetUID(base: number): void
+    {
+        nextUID = base;
+    }
 
     /**
     * Base class for all TSprite sprites
@@ -104,6 +109,7 @@ module TSprite
             super(x, y, w, h);
             this._uid = nextUID++;
             this.id = this._uid.toString(10);
+            this.setVelocity(vx, vy);
         }
 
         /**
@@ -181,7 +187,8 @@ module TSprite
             if (super.intersects(otherSprite))
             {
                 // If there are collisions areas check those
-                if (this._colAreas || otherSprite._colAreas) return this._checkCollisionAreas(otherSprite);
+                if (this._colAreas) return this._checkCollisionAreas(otherSprite);
+                else if (otherSprite._colAreas) return otherSprite._checkCollisionAreas(this);
                 else return true;
             }
             return false;
@@ -195,31 +202,42 @@ module TSprite
          */
         _checkCollisionAreas(otherSprite: Sprite, noRecurse = false): boolean
         {
-            var rect = new Rectangle();
             for (var i in this._colAreas)
             {
-                var area = this._colAreas[i];
-                rect.x = this.x + area.x;
-                rect.y = this.y + area.y;
-                rect.w = area.w;
-                rect.h = area.h;
+                var thisArea = this._getCollisionArea(i);
 
                 if (otherSprite._colAreas)
                 {
                     // Check against other sprite's collision areas
-                    for (var ca in otherSprite._colAreas)
+                    for (var j in otherSprite._colAreas)
                     {
-                        if (rect.intersects(otherSprite._colAreas[ca])) return true;
+                        if (thisArea.intersects(otherSprite._getCollisionArea(j))) return true;
                     }
                 }
                 else
                 {
                     // Check against other sprite's bounds
-                    if (rect.intersects(otherSprite)) return true;
+                    if (thisArea.intersects(otherSprite)) return true;
                 }
             }
 
             return false;
+        }
+
+        /**
+        * Get a collision area with offsets applied
+        * @protected
+        * @param idx Index of the collision area
+        */
+        _getCollisionArea(idx: number): Rectangle
+        {
+            var collArea = this._colAreas[idx];
+            var rect = new Rectangle();
+            rect.x = this.x + collArea.x;
+            rect.y = this.y + collArea.y;
+            rect.w = collArea.w;
+            rect.h = collArea.h;
+            return rect;
         }
     }
 } 

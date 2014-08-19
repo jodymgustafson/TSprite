@@ -261,7 +261,7 @@ module TSprite
             * The outer bounds of the sprite is drawn as green.
             * If there are collision areas defined they are drawn as red.
             */
-            public drawCollisionAreas(context: CanvasRenderingContext2D)
+            public drawCollisionAreas(context: CanvasRenderingContext2D): void
             {
                 context.save();
                 context.strokeStyle = "green";

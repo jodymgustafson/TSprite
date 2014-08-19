@@ -1,8 +1,8 @@
 ﻿/// <reference path="../ExampleApp.ts" />
-/// <reference path="../../src/TSprite/Panel.ts" />
-/// <reference path="../../src/TSprite/Base.ts" />
-/// <reference path="../../src/TSprite/AnimationLoop.ts" />
-/// <reference path="../../src/TSprite/Canvas.ts" />
+/// <reference path="../../TSprite/Panel.ts" />
+/// <reference path="../../TSprite/Base.ts" />
+/// <reference path="../../TSprite/AnimationLoop.ts" />
+/// <reference path="../../TSprite/Canvas.ts" />
 
 class Example4App extends ExampleApp
 {

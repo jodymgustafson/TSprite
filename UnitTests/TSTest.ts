@@ -89,13 +89,13 @@ module TSTest
         public logElement: HTMLElement;
         private curElement: HTMLElement;
 
-        /** @param $parent (optional) The parent element to append results to. If not defined appends to document */
+        /** @param parent (optional) The parent element to append results to. If not defined appends to document. */
         constructor(parent?: HTMLElement)
         {
             this.logElement = this.createDiv("", "tstest-log");
             if (!parent)
             {
-                document.appendChild(this.logElement);
+                document.documentElement.appendChild(this.logElement);
             }
             else
             {
@@ -238,6 +238,14 @@ module TSTest
         public tearDown(): void
         {
         }
+        /** Setup method called before each test method is called. Override to provide custom setup. */
+        public setUpTest(): void
+        {
+        }
+        /** Tear down method called after each test method has been called. Override to provide custom teardown. */
+        public tearDownTest(): void
+        {
+        }
 
         /** Iterates over all of the test methods (those that start with "test") */
         public each(callback: (fn: Function, name: string) => any): void
@@ -310,6 +318,7 @@ module TSTest
             unitTest.each((testFn: Function, name: string) =>
             {
                 this.logs.forEach((log) => log.startTestGroup("Test: " + name));
+                unitTest.setUpTest();
                 try
                 {
                     testFn.call(unitTest);
@@ -329,6 +338,7 @@ module TSTest
                         this.logs.forEach((log) => log.error(ex));
                     }
                 }
+                unitTest.tearDownTest();
                 count++;
                 this.logs.forEach((log) => log.endTestGroup());
             });

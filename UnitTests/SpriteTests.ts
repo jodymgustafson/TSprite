@@ -1,4 +1,5 @@
-﻿/// <reference path="../TSprite/Canvas.ts" />
+﻿/// <reference path="../TSprite/Collections.ts" />
+/// <reference path="../TSprite/Canvas.ts" />
 class SpriteTests extends TSTest.UnitTest
 {
     public testCollisions()

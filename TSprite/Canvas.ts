@@ -208,14 +208,16 @@ module TSprite
             /** @protected */
             _drawable: IDrawable;
 
-            /** Creates a sprite using a Drawable object */
+            /** Creates a sprite with no IDrawable object, for custom subclasses */
+            constructor(x?: number, y?: number, w?: number, h?: number);
+            /** Creates a sprite using a IDrawable object */
             constructor(drawable: IDrawable, x?: number, y?: number, w?: number, h?: number);
             /** Creates a sprite using a draw function */
             constructor(drawFn: (context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) => any, x?: number, y?: number, w?: number, h?: number);
-            constructor(drawable: any, x?: number, y?: number, w?: number, h?: number)
+            constructor(drawable?: any, x?: number, y?: number, w?: number, h?: number)
             {
                 super(x, y, w, h);
-                if (typeof drawable === "function")
+                if (drawable && typeof drawable === "function")
                 {
                     this._drawable = {
                         draw: drawable,
@@ -226,11 +228,18 @@ module TSprite
                 else this._drawable = drawable;
             }
 
+            /**
+             * Draws the sprite on the context if it is visible.
+             * Overrides should call super.draw() to get collision area drawing in debug mode.
+             */
             public draw(context: CanvasRenderingContext2D): CanvasSprite
             {
                 if (this.visible)
                 {
-                    this._drawable.draw(context, this.x, this.y, this.w, this.h);
+                    if (this._drawable)
+                    {
+                        this._drawable.draw(context, this.x, this.y, this.w, this.h);
+                    }
                     if (TSprite.debug)
                     {
                         this.drawCollisionAreas(context);

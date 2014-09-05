@@ -1,4 +1,5 @@
-﻿/// <reference path="../TSprite/Collections.ts" />
+﻿/// <reference path="../TSprite/Base.ts" />
+/// <reference path="../TSprite/Collections.ts" />
 /// <reference path="../TSprite/Canvas.ts" />
 class SpriteTests extends TSTest.UnitTest
 {
@@ -6,12 +7,23 @@ class SpriteTests extends TSTest.UnitTest
     {
         var s1 = new TSprite.Sprite(0, 0, 100, 100);
         var s2 = new TSprite.Sprite(50, 50, 100, 100);
-        this.assert.isTrue(s1.intersects(s2));
-        this.assert.isTrue(s2.intersects(s1));
+        this.assert.isTrue(s1.intersects(s2), "1.1");
+        this.assert.isTrue(s2.intersects(s1), "1.2");
 
         s2.moveTo(100, 100);
         this.assert.isFalse(s1.intersects(s2));
         this.assert.isFalse(s2.intersects(s1));
+    }
+
+    public testBorderCollisions()
+    {
+        var s1 = new TSprite.Sprite(0, 0, 100, 100);
+        var s2 = new TSprite.Sprite(50, 50, 100, 100);
+        this.assert.areIdentical(TSprite.BorderFlags.BOTTOM | TSprite.BorderFlags.RIGHT, s1.intersectsBorders(s2), "1.1");
+        this.assert.areIdentical(TSprite.BorderFlags.TOP | TSprite.BorderFlags.LEFT, s2.intersectsBorders(s1), "1.2");
+
+        s2.moveTo(100, 100);
+        this.assert.areIdentical(TSprite.BorderFlags.NONE, s1.intersectsBorders(s2), "2.1");
     }
 
     public testCollisionAreas()

@@ -1,47 +1,6 @@
-﻿module TSprite
+﻿/// <reference path="Base.ts" />
+module TSprite
 {
-    /** Enum that represent borders of a rectangle. Can be combined using bitwise operators. */
-    export enum BorderFlags
-    {
-        NONE = 0,
-        TOP = 0x01,
-        BOTTOM = 0x02,
-        LEFT = 0x04,
-        RIGHT = 0x08,
-        LEFTORRIGHT = LEFT | RIGHT,
-        TOPORBOTTOM = TOP | BOTTOM,
-        ALL = LEFTORRIGHT | TOPORBOTTOM
-    }
-
-    /** Functions used to check borders from BorderFlags combinations */
-    export module BorderCheck
-    {
-        export function top(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.TOP) !== 0;
-        }
-        export function bottom(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.BOTTOM) !== 0;
-        }
-        export function left(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.LEFT) !== 0;
-        }
-        export function right(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.RIGHT) !== 0;
-        }
-        export function topOrBottom(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.TOPORBOTTOM) !== 0;
-        }
-        export function leftOrRight(borders: number): boolean
-        {
-            return (borders & TSprite.BorderFlags.LEFTORRIGHT) !== 0;
-        }
-    }
-
     /**
      * Implements a Panel, which is a rectangle that has bounds checking.
      */
@@ -55,7 +14,7 @@
         }
 
         /**
-         * Checks if an item is touching or ouside the bounds of this panel
+         * Checks if an item is touching or outside the bounds of this panel
          * @param rect The item to check
          * @return The borders that were hit using TSprite.BorderFlags
          */

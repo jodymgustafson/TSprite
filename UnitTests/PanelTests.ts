@@ -1,4 +1,5 @@
-﻿/// <reference path="../TSprite/Panel.ts" />
+﻿/// <reference path="../TSprite/Base.ts" />
+/// <reference path="../TSprite/Panel.ts" />
 
 class PanelTests extends TSTest.UnitTest
 {

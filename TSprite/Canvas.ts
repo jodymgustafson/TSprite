@@ -2,6 +2,7 @@
 
 module TSprite
 {
+    "use strict";
     /**
     * Sprite objects that are drawn on a canvas
     * @author JM Gustafson
@@ -24,6 +25,11 @@ module TSprite
 
             getWidth(): number;
             getHeight(): number;
+        }
+
+        interface DrawableFunction
+        {
+            (context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number): any;
         }
 
         ///////////////////////////////////////////////////////////////////////
@@ -205,20 +211,21 @@ module TSprite
         /** Implements a sprite that is drawn to a canvas using a drawable object */
         export class CanvasSprite extends TSprite.Sprite
         {
-            /** @protected */
-            _drawable: IDrawable;
+            protected _drawable: IDrawable;
 
             /** Creates a sprite with no IDrawable object, for custom subclasses */
             constructor(x?: number, y?: number, w?: number, h?: number);
             /** Creates a sprite using a IDrawable object */
             constructor(drawable: IDrawable, x?: number, y?: number, w?: number, h?: number);
             /** Creates a sprite using a draw function */
-            constructor(drawFn: (context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) => any, x?: number, y?: number, w?: number, h?: number);
+            constructor(drawFn: DrawableFunction, x?: number, y?: number, w?: number, h?: number);
+            /** The constructor */
             constructor(drawable?: any, x?: number, y?: number, w?: number, h?: number)
             {
                 super(x, y, w, h);
                 if (drawable && typeof drawable === "function")
                 {
+                    // Create a drawable object using the drawable function
                     this._drawable = {
                         draw: drawable,
                         getWidth: () => w,

@@ -4,6 +4,7 @@
 
 module TSprite
 {
+    "use strict";
     /** Used to get or set debug mode */
     export var debug = false;
 

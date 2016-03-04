@@ -28,26 +28,22 @@ module TSprite
             /** @protected */
             _drawable: TSprite.Canvas.IDrawable;
 
-            constructor(x: number, y: number, w: number, h: number);
+            constructor(w: number, h: number);
             /**
-             * @param x X position of the panel
-             * @param y Y position of the panel
              * @param w Width of the panel
              * @param h Height of the panel
              * @param image An image for the background
             */
-            constructor(x: number, y: number, w: number, h: number, image: HTMLImageElement);
+            constructor(w: number, h: number, image: HTMLImageElement);
             /**
-             * @param x X position of the panel
-             * @param y Y position of the panel
              * @param w Width of the panel
              * @param h Height of the panel
              * @param drawable A drawable object for the background
             */
-            constructor(x: number, y: number, w: number, h: number, drawable: TSprite.Canvas.IDrawable);
-            constructor(x: number, y: number, w: number, h: number, imageOrDrawable?: any)
+            constructor(w: number, h: number, drawable: TSprite.Canvas.IDrawable);
+            constructor(w: number, h: number, imageOrDrawable?: any)
             {
-                super(x, y, w, h);
+                super(w, h);
 
                 if (imageOrDrawable instanceof HTMLImageElement)
                 {
@@ -204,15 +200,14 @@ module TSprite
             public vy = 0;
 
             /**
-             * @param x, y - Position of the panel
              * @param w, h - Size of the panel
              * @param drawable - A drawable object
              * @param ppsX, ppsY - Velocity in pixels per second to scroll the background
              */
             //constructor(x: number, y: number, w: number, h: number, drawable: TSprite.Canvas.Drawable);
-            constructor(x: number, y: number, w: number, h: number, drawable: TSprite.Canvas.IDrawable, ppsX = 0, ppsY = 0)
+            constructor(w: number, h: number, drawable: TSprite.Canvas.IDrawable, ppsX = 0, ppsY = 0)
             {
-                super(x, y, w, h, drawable);
+                super(w, h, drawable);
                 this.setVelocity(ppsX, ppsY);
                 this.setBackgroundStyle(TSprite.Canvas.BackgroundStyle.REPEAT);
             }

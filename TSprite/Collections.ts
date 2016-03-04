@@ -3,6 +3,48 @@ module TSprite
 {
     export module Collections
     {
+        /** A simple sprite list */
+        export class SpriteList<T extends Sprite>
+        {
+            private sprites = {};
+            private _count = 0;
+
+            public add(sprite: T): SpriteList<T>
+            {
+                this.sprites[sprite.uid] = sprite;
+                this._count++;
+                return this;
+            }
+
+            public remove(sprite: T): SpriteList<T>
+            {
+                delete this.sprites[sprite.uid];
+                this._count--;
+                return this;
+            }
+
+            public get count(): number
+            {
+                return this._count;
+            }
+
+            public empty(): SpriteList<T>
+            {
+                this.sprites = {};
+                this._count = 0;
+                return this;
+            }
+
+            public forEach(fn: (sprite: T) => any): void
+            {
+                for (var i in this.sprites)
+                {
+                    if (fn(this.sprites[i])) break;
+                }
+
+            }
+        }
+
         export class DoublyLinkedListNode<T>
         {
             public next: DoublyLinkedListNode<T>;

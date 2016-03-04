@@ -8,9 +8,9 @@ module TSprite
     {
         public visible = true;
 
-        constructor(x: number, y: number, w: number, h: number)
+        constructor(w: number, h: number)
         {
-            super(x, y, w, h);
+            super(w, h);
         }
 
         /**

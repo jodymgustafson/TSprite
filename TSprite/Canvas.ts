@@ -33,7 +33,7 @@ module TSprite
         }
 
         ///////////////////////////////////////////////////////////////////////
-        /** Implements a drawable image that is extracdted from a spritesheet */
+        /** Implements a drawable image that is extracted from a spritesheet */
         export class SpriteSheetImage implements IDrawable
         {
             /**
@@ -214,15 +214,15 @@ module TSprite
             protected _drawable: IDrawable;
 
             /** Creates a sprite with no IDrawable object, for custom subclasses */
-            constructor(x?: number, y?: number, w?: number, h?: number);
+            constructor(w?: number, h?: number);
             /** Creates a sprite using a IDrawable object */
-            constructor(drawable: IDrawable, x?: number, y?: number, w?: number, h?: number);
+            constructor(drawable: IDrawable, w?: number, h?: number);
             /** Creates a sprite using a draw function */
-            constructor(drawFn: DrawableFunction, x?: number, y?: number, w?: number, h?: number);
+            constructor(drawFn: DrawableFunction, w?: number, h?: number);
             /** The constructor */
-            constructor(drawable?: any, x?: number, y?: number, w?: number, h?: number)
+            constructor(drawable?: any, w?: number, h?: number)
             {
-                super(x, y, w, h);
+                super(w, h);
                 if (drawable && typeof drawable === "function")
                 {
                     // Create a drawable object using the drawable function
@@ -306,20 +306,18 @@ module TSprite
         {
             /**
             * @param image An HTML image element
-            * @param x Initial x-pos
-            * @param y Initial y-pos
             * @param w Set to width of the image by default
             * @param h Set to height of the image by default
             */
-            constructor(image: HTMLImageElement, x?: number, y?: number, w?: number, h?: number)
+            constructor(image: HTMLImageElement, w?: number, h?: number)
             {
                 super(
                     (context: CanvasRenderingContext2D, xi: number, yi: number, wi: number, hi: number) =>
-                    {
-                        context.drawImage(image, xi, yi, wi, hi);
-                    }
-                    , x, y,
-                    w || image.width, h || image.height);
+                        {
+                            context.drawImage(image, xi, yi, wi, hi);
+                        },
+                    w || image.width,
+                    h || image.height);
             }
         }
 
@@ -335,12 +333,10 @@ module TSprite
             /**
             * @param animFrames The animation frames to use for the sprite
             * @param fps Frames per second
-            * @param x Initial x position
-            * @param y Initial y position
             */
-            constructor(private animFrames: IAnimationFrames, private fps: number, x?: number, y?: number)
+            constructor(private animFrames: IAnimationFrames, private fps: number)
             {
-                super(animFrames, x, y, animFrames.getWidth(), animFrames.getHeight());
+                super(animFrames, animFrames.getWidth(), animFrames.getHeight());
 
                 // Keeps track of when to change image
                 this.msPerFrame = (1000 / this.fps);

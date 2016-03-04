@@ -5,10 +5,12 @@ class PanelTests extends TSTest.UnitTest
 {
     public testCheckBounds()
     {
-        var s1 = new TSprite.Sprite(10, 10, 10, 10);
-        var p1 = new TSprite.Panel(10, 10, 100, 100);
+        var s1 = new TSprite.Sprite(10, 10);
+        var p1 = new TSprite.Panel(100, 100);
 
         // Touching bounds
+        s1.moveTo(10, 10);
+        p1.moveTo(10, 10);
         this.assert.areIdentical(TSprite.BorderFlags.TOP | TSprite.BorderFlags.LEFT, p1.checkBounds(s1), "1.1");
         this.assert.isTrue(TSprite.BorderCheck.top(p1.checkBounds(s1)), "1.2");
         this.assert.isTrue(TSprite.BorderCheck.left(p1.checkBounds(s1)), "1.3");
@@ -36,9 +38,11 @@ class PanelTests extends TSTest.UnitTest
 
     public testRestrictBounds()
     {
-        var s1 = new TSprite.Sprite(0, 0, 10, 10);
-        var p1 = new TSprite.Panel(10, 10, 100, 100);
+        var s1 = new TSprite.Sprite(10, 10);
+        var p1 = new TSprite.Panel(100, 100);
 
+        s1.moveTo(0, 0);
+        p1.moveTo(10, 10);
         var bounds = p1.restrictBounds(s1);
         this.assert.areIdentical(10, s1.x, "1.1");
         this.assert.areIdentical(10, s1.y, "1.2");

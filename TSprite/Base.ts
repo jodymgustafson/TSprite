@@ -64,7 +64,10 @@ module TSprite
     /** Defines a rectanglular area */
     export class Rectangle
     {
-        constructor(public x = 0, public y = 0, public w = 0, public h = 0)
+        public x = 0;
+        public y = 0;
+
+        constructor(public w = 0, public h = 0)
         {
         }
 
@@ -170,16 +173,14 @@ module TSprite
 
         /**
         * Creates a new sprite
-        * @param x Initial x position
-        * @param y Initial y position
         * @param w Width of the sprite
         * @param h Height of the sprite
         * @param vx Initial x velocity in pixels per second
         * @param vy Initial y velocity in pixels per second
         */
-        constructor(x?: number, y?: number, w?: number, h?: number, public vx = 0, public vy = 0)
+        constructor(w?: number, h?: number, public vx = 0, public vy = 0)
         {
-            super(x, y, w, h);
+            super(w, h);
             this._uid = nextUID++;
             this.id = this._uid.toString(10);
             this.setVelocity(vx, vy);
@@ -220,6 +221,14 @@ module TSprite
             return this;
         }
 
+        /**
+         * @Override to get correct return type
+         */
+        public moveTo(x: number, y: number): Sprite
+        {
+            return <Sprite>super.moveTo(x, y);
+        }
+
         /** Gets the x and y velocity in pixels per second */
         public getVelocity(): IVelocity
         {
@@ -241,7 +250,7 @@ module TSprite
         /** Adds a collision area to be used to check for collisions */
         public addCollisionArea(x: number, y: number, w: number, h: number): Sprite
         {
-            var rect = new Rectangle(x, y, w, h);
+            var rect = new Rectangle(w, h).moveTo(x, y);
             if (!this._colAreas)
             {
                 this._colAreas = [rect];
